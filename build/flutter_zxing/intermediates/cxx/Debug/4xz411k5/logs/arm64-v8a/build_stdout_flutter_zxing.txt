@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Users\it05\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_zxing-1.8.2\android\.cxx\Debug\4xz411k5\arm64-v8a'
+ninja: no work to do.

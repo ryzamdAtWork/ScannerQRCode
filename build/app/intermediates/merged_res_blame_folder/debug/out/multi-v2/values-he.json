@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.demo_flutter_ex1.app-mergeDebugResources-40:/values-he/values-he.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\it05\\.gradle\\caches\\8.10.2\\transforms\\caf05c0b308577f940f550ec425ba823\\transformed\\jetified-zxing-android-embedded-4.3.0\\res\\values-he\\values-he.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,111,161,296",
+                        "endColumns": "55,49,134,89",
+                        "endOffsets": "106,156,291,381"
+                    }
+                }
+            ]
+        }
+    ]
+}
