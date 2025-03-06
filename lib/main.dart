@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginScreen(),
         '/widgetTree': (context) => const WidgetTreeScreen(),
         '/dashboard': (context) => const DashBoardScreen(),
-        '/temporary': (context) => const TemporaryScreen(),
+        '/temporary': (context) => const TemporaryScreen(), //test commit
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
