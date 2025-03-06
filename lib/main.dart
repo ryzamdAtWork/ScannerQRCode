@@ -1,6 +1,6 @@
 import 'package:demo_flutter_ex1/datas/notifiers.dart';
 import 'package:demo_flutter_ex1/views/pages/dashboard/dash_board_screen.dart';
-import 'package:demo_flutter_ex1/views/pages/dashboard/temporary_screen.dart';
+import 'package:demo_flutter_ex1/views/pages/dashboard/temporary/temporary_screen.dart';
 import 'package:demo_flutter_ex1/views/pages/login/login_screen.dart';
 import 'package:demo_flutter_ex1/views/widget_tree.dart';
 import 'package:flutter/material.dart';
