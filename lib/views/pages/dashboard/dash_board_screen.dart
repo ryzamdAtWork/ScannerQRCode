@@ -1,4 +1,4 @@
-import 'package:demo_flutter_ex1/views/pages/dashboard/widget_build_dashboard_fn.dart';
+import 'package:demo_flutter_ex1/views/pages/dashboard/dashboard_component_widgets.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardScreen extends StatefulWidget {
