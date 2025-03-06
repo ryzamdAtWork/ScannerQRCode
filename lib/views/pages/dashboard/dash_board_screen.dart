@@ -1,4 +1,6 @@
-import 'package:demo_flutter_ex1/views/pages/dashboard/dashboard_component_widgets.dart';
+import 'package:demo_flutter_ex1/views/pages/dashboard/dash_board_component_widgets.dart';
+import 'package:demo_flutter_ex1/views/pages/widgets/general_screen.dart';
+import 'package:demo_flutter_ex1/views/pages/widgets/navbar_widget.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -14,12 +16,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFFF3F3F3),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
+
+    return GeneralScreenScaffold(
+      title: Text(
           "DASH BOARD",
           style: const TextStyle(
             color: Colors.black,
@@ -27,13 +26,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-
-      // Nếu Figma có Navigation Drawer hoặc Bottom Nav Bar, bạn thêm vào
-      // drawer: Drawer(...),
-      // bottomNavigationBar: ...
+      showBackButton: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -55,6 +48,24 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: NavbarWidget(),
     );
   }
 }
+
+
+    //  backgroundColor: const Color(0xFFF3F3F3),
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.white,
+    //     elevation: 0,
+    //     title: Text(
+    //       "DASH BOARD",
+    //       style: const TextStyle(
+    //         color: Colors.black,
+    //         fontSize: 20,
+    //         fontWeight: FontWeight.bold,
+    //       ),
+    //     ),
+    //     centerTitle: true,
+    //     iconTheme: const IconThemeData(color: Colors.black),
+    //   ),
