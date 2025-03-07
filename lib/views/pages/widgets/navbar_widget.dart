@@ -21,6 +21,7 @@ class NavbarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedIndex = _getSelectedIndex(context);
     return NavigationBar(
+      height: 60,
       destinations: const [
         NavigationDestination(icon: Icon(Icons.article), label: 'Processing'),
         NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
