@@ -1,26 +1,12 @@
-import 'dart:async';
-import 'package:demo_flutter_ex1/utilities/constants/key_code_constants.dart';
-import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class TemporaryBusiness {
-  static const MethodChannel _channel = MethodChannel('com.example.demo_flutter_ex1');
-  static Function(String)? onBarcodeScanned;
-  static final List<String> scannedBarcodes = [];
-
-   static void initializeScannerListener(Function(String) onScanned) {
-    _channel.setMethodCallHandler((MethodCall call) async {
-      if (call.method == "scannerKeyPressed") {
-        String scannedData = call.arguments.toString();
-        onScanned(scannedData);
-      }
-    });
-  }
-
-   static Future<bool> toggleTorch(
-      MobileScannerController controller, bool currentState) async {
+  
+  /// Toggle đèn flash; trả về trạng thái mới (đảo ngược trạng thái hiện tại).
+  static Future<bool> toggleTorch(
+      MobileScannerController controller, bool currentTorch) async {
     await controller.toggleTorch();
-    return !currentState;
+    return !currentTorch;
   }
 
   /// Chuyển camera.
@@ -35,22 +21,14 @@ class TemporaryBusiness {
   }
 
   /// Xử lý kết quả quét: nếu có barcode, trả về giá trị đầu tiên; nếu không, trả về chuỗi rỗng.
-   static String processBarcode(BarcodeCapture barcodeCapture) {
-    if (barcodeCapture.barcodes.isNotEmpty) {
-      final barcode = barcodeCapture.barcodes.first;
-      return barcode.rawValue ?? "";
+  static String processBarcode(BarcodeCapture capture) {
+    if (capture.barcodes.isNotEmpty) {
+      final barcode = capture.barcodes.first;
+      final code = barcode.rawValue;
+      if (code != null && code.isNotEmpty) {
+        return code;
+      }
     }
-    return "";
-  }
-
-  static bool isScannerButtonPressed(KeyEvent event) {
-      return event.logicalKey.keyId == KeycodeConstants.scannerKeyCode;
-  }
-
-  static Future<void> triggerScan(MobileScannerController controller, Function(String) onScanned)
-  async
-  {
-    await controller.start();
+    return '';
   }
 }
-

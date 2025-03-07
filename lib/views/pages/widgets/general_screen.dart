@@ -8,11 +8,13 @@ class GeneralScreenScaffold extends StatelessWidget {
   final bool showBackButton;
   final Widget body;
   final Widget? bottomNavigationBar;
+  final AppBar? genAppBar;
   final List<Widget>? actions;
 
   const GeneralScreenScaffold({
     super.key,
     this.title,
+    this.genAppBar,
     this.showBackButton = false,
     required this.body,
     this.bottomNavigationBar,
@@ -38,59 +40,6 @@ class GeneralScreenScaffold extends StatelessWidget {
       ),
       body: SafeArea(child: body),
       bottomNavigationBar: bottomNavigationBar,
-    );
-  }
-}
-
-class GeneralScreenScaffoldHeaderIcons extends StatefulWidget {
-  final Text? title;
-  final bool showBackButton;
-  final Widget body;
-  final Widget? bottomNavigationBar;
-  final Widget? sizedBox;
-  final AppBar? genAppBar;
-  final List<Widget>? actions;
-
-  const GeneralScreenScaffoldHeaderIcons({
-    super.key,
-    this.title,
-    this.genAppBar,
-    this.sizedBox,
-    this.showBackButton = false,
-    required this.body,
-    this.bottomNavigationBar,
-    this.actions,
-  });
-
-  @override
-  State<GeneralScreenScaffoldHeaderIcons> createState() =>
-      _GeneralScreenScaffoldHeaderIconsState();
-}
-
-class _GeneralScreenScaffoldHeaderIconsState
-    extends State<GeneralScreenScaffoldHeaderIcons> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: widget.genAppBar ??
-          AppBar(
-            leading: widget.showBackButton && Navigator.canPop(context)
-                ? IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                : null,
-            title: widget.title,
-            centerTitle: true,
-            
-            automaticallyImplyLeading: widget.showBackButton,
-            iconTheme: const IconThemeData(color: Colors.black),
-            actions: widget.actions,
-          ),
-      
-      body: SafeArea(child: widget.body),
-
-      bottomNavigationBar: widget.bottomNavigationBar,
     );
   }
 }
