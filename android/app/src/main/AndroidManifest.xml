@@ -30,6 +30,13 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <receiver android:name=".ScanReceiver">
+            <intent-filter>
+                <action android:name="com.ubx.datawedge.SCANNER_DECODE_EVENT"/>
+                <action android:name="android.intent.ACTION_DECODE_DATA"/>
+                <action android:name="urovo.rcv.message"/>
+            </intent-filter>
+        </receiver>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
