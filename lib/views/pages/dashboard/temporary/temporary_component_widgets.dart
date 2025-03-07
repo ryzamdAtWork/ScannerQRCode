@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class TemporaryComponentWidgets {
-
   static Widget _buildTableHeader(BuildContext context) {
     return Container(
       color: Colors.grey[350],
@@ -10,122 +9,64 @@ class TemporaryComponentWidgets {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
-        children: const [
-          Expanded(
-            child: Text(
-              "Code Name",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              "Status",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              "Quantity",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              "Total",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
+        children: const
+        [
+              Expanded(child: Text("Code Name", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+              Expanded(child: Text("Status", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+              Expanded(child: Text("Quantity", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+              Expanded(child: Text("Total", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
         ],
       ),
     );
   }
 
-  static Widget _buildTableRow(BuildContext context, int index, String barcodeValue) {
-    String category = "Dashboard";
-    String status = "Active";
-    String quantity = "10";
-    String total = "120 PS";
-    if (index == 1) {
-      category = barcodeValue;
-      status = "Online";
-      total = "450 PS";
-    } else if (index == 2) {
-      category = barcodeValue;
-      status = "Pending";
-      total = "78 PS";
-    }
+  static Widget _buildTableRow(BuildContext context, int index, List<String> scannedValues,)
+  {
+    String category = index < scannedValues.length ? scannedValues[index] : "N/A";
+    String status = "Pending";
+    String quantity = "--";
+    String total = "--";
+    
     return Container(
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Colors.black, width: 1),
-        ),
+        border: Border(bottom: BorderSide(color: Colors.black, width: 1)),
       ),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       child: Row(
         children: [
           Expanded(
-            child: Text(
-              category,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
+            child: Text(category,textAlign: TextAlign.center,style: const TextStyle(color: Colors.black),),),
           Expanded(
-            child: Text(
-              status,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
+            child: Text(status,textAlign: TextAlign.center,style: const TextStyle(color: Colors.black),),),
           Expanded(
-            child: Text(
-              quantity,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
+            child: Text(quantity,textAlign: TextAlign.center,style: const TextStyle(color: Colors.black),),),
           Expanded(
-            child: Text(
-              total,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
+            child: Text(total,textAlign: TextAlign.center,style: const TextStyle(color: Colors.black),),),
         ],
       ),
     );
   }
 
-  static Widget _buildTableData(BuildContext context, String barcodeValue) {
+
+  static Widget _buildTableData(BuildContext context, List<String> scannedValues) {
     return SizedBox(
       height: 280,
       width: double.maxFinite,
-      child: ListView.builder(
-        itemCount: 15,
+      child: scannedValues.isEmpty
+                ? const Center(child: Text("No scanned data"))
+                : ListView.builder(
+        itemCount: scannedValues.length,
         itemBuilder: (context, index) {
-          return _buildTableRow(context, index, barcodeValue);
+          return _buildTableRow(context, index, scannedValues);
         },
       ),
     );
   }
 
-   static Widget buildFeatureTableTemporary(BuildContext context, String barcodeValue) {
+  static Widget buildFeatureTableTemporary(
+    BuildContext context,
+    List<String> scannedValues,
+  ) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(width: 5, color: Colors.black),
@@ -134,7 +75,7 @@ class TemporaryComponentWidgets {
       child: Column(
         children: [
           _buildTableHeader(context),
-          _buildTableData(context, barcodeValue),
+          _buildTableData(context, scannedValues),
         ],
       ),
     );
@@ -157,20 +98,22 @@ class TemporaryComponentWidgets {
             torchEnabled ? Icons.flash_on : Icons.flash_off,
             color: Colors.yellow,
           ),
-          onPressed: cameraActive
-              ? () async {
-                  await onToggleTorch();
-                }
-              : null,
+          onPressed:
+              cameraActive
+                  ? () async {
+                    await onToggleTorch();
+                  }
+                  : null,
         ),
         IconButton(
           iconSize: 24,
           icon: const Icon(Icons.flip_camera_ios),
-          onPressed: cameraActive
-              ? () async {
-                  await onSwitchCamera();
-                }
-              : null,
+          onPressed:
+              cameraActive
+                  ? () async {
+                    await onSwitchCamera();
+                  }
+                  : null,
         ),
         IconButton(
           iconSize: 24,
@@ -184,8 +127,6 @@ class TemporaryComponentWidgets {
     );
   }
 
-  /// Vùng hiển thị camera (scanner).
-  /// Nếu cameraActive = true, hiển thị MobileScanner; nếu false, hiển thị placeholder.
   static Widget buildTemporaryScannerSection({
     required bool cameraActive,
     required MobileScannerController controller,
