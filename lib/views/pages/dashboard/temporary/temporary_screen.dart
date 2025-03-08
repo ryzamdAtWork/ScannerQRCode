@@ -53,8 +53,8 @@ class _TemporaryScreenState extends State<TemporaryScreen>
       _controller.start();
     }
   }
-  
-   Future<void> _resetScanner() async {
+
+  Future<void> _resetScanner() async {
     await TemporaryBusiness.resetScanner(_controller);
   }
 
