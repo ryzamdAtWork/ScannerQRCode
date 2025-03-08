@@ -21,11 +21,13 @@ class NavbarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedIndex = _getSelectedIndex(context);
     return NavigationBar(
-      height: 60,
+      height: 45,
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      backgroundColor: Colors.grey[400],
       destinations: const [
-        NavigationDestination(icon: Icon(Icons.article), label: 'Processing'),
-        NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-        NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+        NavigationDestination(icon: Icon(Icons.article), label: ''),
+        NavigationDestination(icon: Icon(Icons.home), label: ''),
+        NavigationDestination(icon: Icon(Icons.person), label: ''),
       ],
       selectedIndex: selectedIndex,
       onDestinationSelected: (int value) {

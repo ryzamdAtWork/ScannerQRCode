@@ -89,8 +89,9 @@ class TemporaryComponentWidgets {
     required Future<void> Function() onSwitchCamera,
   }) {
     return AppBar(
-      backgroundColor: Colors.black,
-      title: const Center(child: Text("TEMPORARY")),
+      backgroundColor: Colors.blue,
+      toolbarHeight: 50,
+      title: const Center(child: Text("TEMPORARY", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
       actions: [
         IconButton(
           iconSize: 24,

@@ -35,81 +35,63 @@ class DashboardWidgets {
 
   static Widget buildStatisticCards(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center, // canh giữa
       children: [
-        // Card 1
-        Expanded(
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: EdgeInsets.zero, // tránh padding thừa
-              backgroundColor:
-                  Colors.transparent, // để Container tự quản lý màu
-              shadowColor: Colors.transparent, // tránh xung đột shadow
-              overlayColor: Colors.transparent,
-              elevation: 0,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, '/temporary');
-            },
-
-            child: Container(
-              height: 100,
-              margin: const EdgeInsets.only(right: 8),
-              decoration: BoxDecoration(
-                color: Color(0xff58A8C6),
-                borderRadius: BorderRadius.circular(12),
-                // shadow nếu cần
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade300,
-                    offset: const Offset(0, 2),
-                    blurRadius: 4,
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "TEMPORARY",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        _buildCardButton(
+          context: context,
+          label: "TEMPORARY",
+          onPressed: () => Navigator.pushNamed(context, '/temporary'),
         ),
-        // Card 2
-        Expanded(
-          child: Container(
-            height: 100,
-            margin: const EdgeInsets.only(left: 8),
-            decoration: BoxDecoration(
-              color: Color(0xff58A8C6),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade300,
-                  offset: const Offset(0, 2),
-                  blurRadius: 4,
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "OUTBOUND",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+        const SizedBox(width: 16), // khoảng cách giữa hai button
+        _buildCardButton(
+          context: context,
+          label: "OUTBOUND",
+          onPressed: () => Navigator.pushNamed(context, '/outbound'),
         ),
       ],
+    );
+  }
+
+  static Widget _buildCardButton({required BuildContext context,required String label,required VoidCallback onPressed,}) {
+    return TextButton(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        // Đảm bảo màu chữ là trắng, không bị theme ghi đè
+        foregroundColor: Colors.white,
+        // Loại bỏ mọi padding mặc định
+        padding: EdgeInsets.zero,
+        // Tạo bo góc
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      child: Container(
+        // Đảm bảo kích thước (ví dụ 100x100)
+        width: 150,
+        height: 100,
+        margin: const EdgeInsets.only(right: 0),
+        decoration: BoxDecoration(
+          color: const Color(0xff58A8C6), // màu xanh theo thiết kế
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade300,
+              offset: const Offset(0, 2),
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        // Canh chữ vào giữa
+        alignment: Alignment.center,
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white, // Chắc chắn màu trắng
+          ),
+        ),
+      ),
     );
   }
 
@@ -163,7 +145,7 @@ class DashboardWidgets {
           ),
 
           SizedBox(
-            height: 200,
+            height: 250,
             width: double.maxFinite,
             child: ListView.builder(
               itemCount: 6,

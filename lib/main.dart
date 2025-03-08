@@ -1,4 +1,5 @@
 import 'package:demo_flutter_ex1/views/pages/dashboard/dash_board_screen.dart';
+import 'package:demo_flutter_ex1/views/pages/dashboard/outbound/out_bound_screen.dart';
 import 'package:demo_flutter_ex1/views/pages/dashboard/temporary/temporary_screen.dart';
 import 'package:demo_flutter_ex1/views/pages/login/login_screen.dart';
 import 'package:demo_flutter_ex1/views/pages/personal/personal_screen.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => const DashBoardScreen(),
         '/process' : (context) => const ProcessScreen(),
         '/personal' : (context) => const PersonalScreen(),
+        '/outbound' : (context) => const OutBoundScreen(),
       },
       onGenerateRoute: (RouteSettings settings) {
         if (settings.name == '/temporary') {

@@ -26,6 +26,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
+      isSubScreen: false,
       showBackButton: false,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -52,20 +53,3 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     );
   }
 }
-
-
-    //  backgroundColor: const Color(0xFFF3F3F3),
-    //   appBar: AppBar(
-    //     backgroundColor: Colors.white,
-    //     elevation: 0,
-    //     title: Text(
-    //       "DASH BOARD",
-    //       style: const TextStyle(
-    //         color: Colors.black,
-    //         fontSize: 20,
-    //         fontWeight: FontWeight.bold,
-    //       ),
-    //     ),
-    //     centerTitle: true,
-    //     iconTheme: const IconThemeData(color: Colors.black),
-    //   ),

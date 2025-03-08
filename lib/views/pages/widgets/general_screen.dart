@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class GeneralScreenScaffold extends StatelessWidget {
   final Text? title;
   final bool showBackButton;
+  final bool isSubScreen;
   final Widget body;
   final Widget? bottomNavigationBar;
   final List<Widget>? actions;
@@ -17,24 +18,35 @@ class GeneralScreenScaffold extends StatelessWidget {
     required this.body,
     this.bottomNavigationBar,
     this.actions,
+    required this.isSubScreen,
   });
 
   @override
   Widget build(BuildContext context) {
+
+    final Widget? leadingButton = showBackButton && Navigator.canPop(context) ? IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context),
+          ): null;
+
+    final List<Widget> actionButtons = isSubScreen ? <Widget>[
+            if (actions != null) ...actions!,
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ] : (actions ?? <Widget>[]);
+
     return Scaffold(
       appBar: AppBar(
-        leading:
-            showBackButton && Navigator.canPop(context)
-                ? IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () => Navigator.pop(context),
-                )
-                : null,
+        leading: leadingButton,
         title: title,
         centerTitle: true,
         automaticallyImplyLeading: showBackButton,
+        backgroundColor: Colors.blue,
+        toolbarHeight: 50,
         iconTheme: const IconThemeData(color: Colors.black),
-        actions: actions,
+        actions: actionButtons,
       ),
       body: SafeArea(child: body),
       bottomNavigationBar: bottomNavigationBar,
@@ -45,6 +57,7 @@ class GeneralScreenScaffold extends StatelessWidget {
 class GeneralScreenScaffoldHeaderIcons extends StatefulWidget {
   final Text? title;
   final bool showBackButton;
+  final TextStyle? textStyle;
   final Widget body;
   final Widget? bottomNavigationBar;
   final Widget? sizedBox;
@@ -56,6 +69,7 @@ class GeneralScreenScaffoldHeaderIcons extends StatefulWidget {
     this.title,
     this.genAppBar,
     this.sizedBox,
+    this.textStyle,
     this.showBackButton = false,
     required this.body,
     this.bottomNavigationBar,
@@ -72,24 +86,55 @@ class _GeneralScreenScaffoldHeaderIconsState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.genAppBar ??
+      appBar:
+          widget.genAppBar ??
           AppBar(
-            leading: widget.showBackButton && Navigator.canPop(context)
-                ? IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                : null,
+            leading:
+                widget.showBackButton && Navigator.canPop(context)
+                    ? IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () => Navigator.pop(context),
+                    )
+                    : null,
             title: widget.title,
             centerTitle: true,
-            
+            backgroundColor: Colors.blue,
+            toolbarHeight: 50,
             automaticallyImplyLeading: widget.showBackButton,
             iconTheme: const IconThemeData(color: Colors.black),
             actions: widget.actions,
           ),
-      
+
       body: SafeArea(child: widget.body),
 
+      bottomNavigationBar: widget.bottomNavigationBar,
+    );
+  }
+}
+
+class SubScreenScafford extends StatefulWidget {
+  final bool isSubScreen;
+  final Widget body;
+  final Widget? bottomNavigationBar;
+  final List<Widget>? actions;
+
+  const SubScreenScafford({
+    super.key,
+    required this.isSubScreen,
+    required this.body,
+    this.bottomNavigationBar,
+    this.actions,
+  });
+
+  @override
+  State<SubScreenScafford> createState() => _SubScreenScaffordState();
+}
+
+class _SubScreenScaffordState extends State<SubScreenScafford> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(child: widget.body),
       bottomNavigationBar: widget.bottomNavigationBar,
     );
   }
