@@ -1,3 +1,4 @@
+import 'package:demo_flutter_ex1/utilities/constants/style_constants.dart';
 import 'package:flutter/material.dart';
 
 /// GeneralScreenScaffold là widget chung cho tất cả các màn hình,
@@ -23,27 +24,33 @@ class GeneralScreenScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final Widget? leadingButton = showBackButton && Navigator.canPop(context) ? IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context),
-          ): null;
-
-    final List<Widget> actionButtons = isSubScreen ? <Widget>[
-            if (actions != null) ...actions!,
-            IconButton(
+    final Widget? leadingButton =
+        showBackButton && Navigator.canPop(context)
+            ? IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => Navigator.pop(context),
-            ),
-          ] : (actions ?? <Widget>[]);
+            )
+            : null;
+
+    final List<Widget> actionButtons =
+        isSubScreen
+            ? <Widget>[
+              if (actions != null) ...actions!,
+              IconButton(
+                icon: const Icon(Icons.arrow_back, size: 1),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ]
+            : (actions ?? <Widget>[]);
 
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         leading: leadingButton,
         title: title,
         centerTitle: true,
         automaticallyImplyLeading: showBackButton,
-        backgroundColor: Colors.blue,
+        backgroundColor: ColorsConstants.primaryColor,
         toolbarHeight: 50,
         iconTheme: const IconThemeData(color: Colors.black),
         actions: actionButtons,

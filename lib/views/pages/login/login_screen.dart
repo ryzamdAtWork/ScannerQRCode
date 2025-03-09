@@ -43,8 +43,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 40,),
-                Column(
+                const SizedBox(height: 40,),
+                const Column(
                   children: [
                     TextField(
                       decoration: InputDecoration(
@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/dashboard');
